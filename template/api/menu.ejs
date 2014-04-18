@@ -1,0 +1,21 @@
+<aside id="sidebar" class="interface">
+<% for (var key in apis) { 
+	var api = apis[key];
+	var basename = api.basename;
+%>
+	<a class="toc_title" href="#<%= basename %>"><%= basename %></a>
+	<ul class="toc_section">
+		<% api.comments.forEach(function(item){ %>
+			<% if (item.tags.length>0) { %> 
+				<% for(i in item.tags[0] ) { %>
+					<% if (i == "string" && item.tags[0][i] != "" ) { %> 
+						<li>
+							- <a href="#<%= basename %>_<%=item.tags[0][i]%>"><%=item.tags[0][i]%></a>
+						</li>
+					<% } %>
+				<% } %>
+			<% } %>
+		<% }) %>
+	</ul>
+<% } %>
+</aside>

@@ -1,0 +1,137 @@
+<% include demo/header %>
+
+	<script type="text/javascript">
+	<%- menuData %>
+	</script>
+
+	<a name="ui"></a>
+	<h1>demo</h1>
+	
+	<!-- /header -->
+	<div class="menu clearfix pageNav">
+		<ul class="menuList">
+			<!-- 
+			<li>
+				<a class="defalut" href="../demo/animate/animate.html">animate</a>
+				<a class="demo" href="../demo/animate/animate2.html">翻动动画</a>
+				<a class="demo" href="../demo/animate/animate_easying.html">缓动函数</a>
+			</li>
+			 -->
+		</ul>
+	</div>
+	<br/>
+	<!-- content -->
+	<div class="content clearfix" id="content">
+		<div class="sidebar">
+			<h3 class="demoTitle"></h3>
+			<div class="demoList"></div>
+		</div>
+		<div class="main">
+			<iframe src="" frameborder="no" marginwidth="0" marginheight="0" width="760" height="500" class="demoIframe"></iframe>
+			<div class="extra">
+				<p><a href="###" target="_blank" class="demoLink">新窗口打开</a></p>
+				<p><a href="###" target="_blank" class="apiLink">API</a></p>
+			</div>
+		</div>
+		<!-- <div class="seeCodeWrap clearfix">
+			<a class="seeCode">>>查看源代码</a>
+			<textarea class="seeCodeMain"></textarea>
+		</div> -->
+	</div>
+	<!-- /content -->
+
+	<script type="text/javascript">
+		var demo = {};
+
+		demo.hrefSet = function(href){
+			$('.demoLink').attr('href',href);
+			$('.demoIframe').attr('src',href);
+		}
+
+		demo.init = function(){
+			$('.menuList').html(menuData);
+
+			$('.menuList li').each(function(i){
+				var first = $(this).find('a').eq(0);
+				first.attr('class','default');
+				first.addClass('on');
+				first.click(function(event){
+					var self = $(this);
+					var selfHtml = self.html();
+
+					$('.menuList a').removeClass('on');
+					self.addClass('on');
+
+					//alert(selfHtml);
+					$('.demoList').html(self.parent().html());
+					//.find('a').eq(0).html('基本')
+					demo.hrefSet(self.attr('href'));
+
+					$('.demoList a').click(function(event){
+						var self = $(this);
+						demo.hrefSet(self.attr('href'));
+						$('.demoList a').removeClass('on');
+						self.addClass('on');
+						event.preventDefault();
+					})
+					
+					$('.demoTitle').html(selfHtml);
+					var data_url = self.attr('data-url');
+					
+					//兼容
+					if ( data_url == "tab" || data_url == "carousel" || data_url == "focus" || 
+						data_url == "slider" 
+					){
+						data_url = 'switchable'
+					}
+					$('.apiLink').attr('href','api.html#'+data_url);
+
+					window.location.hash=data_url;
+
+					event.preventDefault();
+				})
+			});
+
+			if (window.location.hash) {
+				var url = window.location.hash;
+				url = url.replace('#','');
+				$('.menuList a').each(function(i){
+					if ($(this).attr('data-url') == url ) {
+						$(this).click();
+					}
+				})
+			}else {
+				$(".menuList li a").eq(0).click();
+			}
+		}
+
+		if (typeof(menuData) != 'undefined') {
+			demo.init();
+		}
+
+
+		$('.seeCode').click(function(){
+			var href = $('.demoLink').attr('href');
+			if (href != '###') {
+				$.ajax({
+					type:'GET',
+					url:href,
+					dataType:'html',
+					success:function(data){
+						/*
+						//console.log(data);
+						var reg = new RegExp('<body>(.*?)<\/body>','gm');
+						var result = data.match(reg);
+						console.log(result);
+						*/
+						$('.seeCodeMain').val(data);
+					},
+					error:function(data){
+						
+					}
+				});
+			}
+		})
+	</script>
+
+<% include demo/footer %>

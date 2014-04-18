@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>click</title>
+<link href="http://misc.360buyimg.com/lib/skin/2013/base.css" type="text/css" rel="stylesheet" />
+
+<script type="text/javascript" src="http://misc.360buyimg.com/jdf/lib/jquery-1.6.4.js"></script>
+<script type="text/javascript" src="http://misc.360buyimg.com/jdf/1.0.0/unit/base/1.0.0/base.js"></script>
+
+<style type="text/css">
+/* 测试样式 */
+a{color:#005ea7;}
+.tips{border:1px solid #ccc;padding:1px 4px;display:inline-block;display:-moz-inline-stack;*display:inline;*zoom:1;}
+
+</style>
+</head>
+<body>
+
+<h2>click</h2>
+<p id="tips">
+	我的积分：68  &nbsp;&nbsp;<span class="tips" data-tips="优惠券是通过买赠，活动参与，积分兑换等形式发放给用户，用于减免购买支付的惠民措施。 <a href='#'>查看详情</a>">优惠券</span>：2张
+</p>
+
+<script type="text/javascript">
+seajs.use(['jdf/1.0.0/ui/tips/1.0.0/tips'],function(tips){
+	$('#tips .tips').tips({
+		type:'click',
+		align:['right','center'],
+		autoResize:false,
+		diff:6
+	});
+});
+</script>
+
+</body>
+</html>

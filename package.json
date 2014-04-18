@@ -1,0 +1,14 @@
+{
+	"name": "jdd",
+	"description": "js文档和demo快速生成",
+	"version": "1.0.0",
+	"author": {
+		"name": "putaoshu@126.com"
+	},
+	"main": "./index.js",
+	"dependencies": {
+		"ejs": "1.0.0",
+		"github-flavored-markdown": "1.0.1"
+	},
+	"readmeFilename": "README.md"
+}

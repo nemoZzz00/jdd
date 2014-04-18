@@ -1,0 +1,113 @@
+<div class="container">
+	<p>Created time: <%= date %></p>
+	<hr/>
+	<% for (var key in apis) { 
+		var api = apis[key];
+		var basename = api.basename;
+	%>
+		<h3 id="<%= basename %>" class="h3"><%= basename %></h3>
+
+		<% api.comments.forEach(function(item){ %>
+			<% if (item.tags.length>0) { %> 
+				<% for(i in item.tags[0] ) { %>
+					<% if (i == "string" && item.tags[0][i] != "" ) { %> 
+						<h4 id="<%= basename %>_<%=item.tags[0][i]%>"><%=item.tags[0][i]%></h4>
+					<% } %>
+				<% } %>
+			<% } %>
+
+			<% if (item.description.summary) { %> 
+			<div class="summary">
+				<%- item.description.summary%>
+				<%- item.description.body%>
+			</div>
+			<% } %>
+
+			<% if (item.isPrivate) { %> 
+			<p><%= item.isPrivate %></p>
+			<% } %>
+			
+			<% if (item.isPrivate) { %> 
+			<p><%= item.ignore %></p>
+			<% } %>
+			
+			<div class="paramsList">
+			<% for (var j = 0, k = item.tags.length; j < k; j++) { 
+				var tag = item.tags[j];
+				switch (tag.type) {
+				case 'return':
+			  %>
+				<p>返回值:</p>
+				<ul>
+					<li>
+						&nbsp;&nbsp;{<%=tag.types && tag.types.join(',')%>}
+						&nbsp;&nbsp;<%=tag.description%>
+					</li>
+				</ul>
+			  <% break;
+				case 'method':
+				%>
+				
+			  <% break;
+				case 'see':
+				%>
+				<p>参考:</p>
+				<ul>
+					<li>
+						<a href="<%=tag.url%>" target="_blank"><%=tag.visibility%></a>
+					</li>
+				</ul>
+
+			  <% break;
+				case 'param':
+				%>
+				<p>参数:</p>
+				<ul>
+					<li>
+						<code><%=tag.name%></code> 
+						&nbsp;&nbsp;{<%=tag.types && tag.types.join(',')%>} 
+						&nbsp;&nbsp;<%=tag.description%>
+					</li>
+				</ul>
+			  <% break;
+				case 'api':
+			  %>
+				<p>api</p>
+				<ul>
+				  <li><%=tag.visibility%></li>
+				</ul>
+			  <% break;
+				default:%>
+				<p><%=tag.type%></p>
+				<ul>
+				  <li>
+				  <% if (tag.types) { %>&nbsp;&nbsp;{<%=tag.types && tag.types.join(',')%>}  <% } %>
+				  <% if (tag.name) { %>&nbsp;&nbsp;<%=tag.name%>  <% } %>
+				  <% if (tag.string) { %>&nbsp;&nbsp;<%=tag.string%>  <% } %>
+				  <% if (tag.description) { %>&nbsp;&nbsp;<%=tag.description%>  <% } %>
+				  </li>
+				</ul>
+			  <% } %>
+			<% } %>
+			</div>
+
+			<% if (item.code222) { %> 
+			<p>
+				<h5>源码 => item.code </h5>
+				<textarea class="textarea"><%= item.code %></textarea>
+			</p>
+			<% } %>
+
+			<% if (item.ctx222) { %> 
+				<p>
+					<%= item.ctx.type %>,
+					<%= item.ctx.receiver %>,
+					<h3 id="<%= item.ctx.name %>"><%= item.ctx.name %></h3>
+					<%= item.ctx.string %>,
+				</p>
+			<% } %>
+		<% }) %>
+
+		<hr/>
+	<% } %>
+</div>

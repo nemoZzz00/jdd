@@ -1,0 +1,13 @@
+{
+	"name": "myjs",
+	"version": "1.0.0",
+	"author": "fe",
+	"api": {
+		"name": "jds api",
+		"description": ""
+	},
+	"apisource":"js/",
+	"demosource":"demo/",
+	"target":"docs/",
+	"demopathprefix":"../"
+}
