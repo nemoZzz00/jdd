@@ -21,7 +21,7 @@ var f = require('./lib/file.js');
  */
 var configFileName = "package.json";
 var changelogFileName = "changelog.md";
-var readmeFileName = "index.md";
+var indexFileName = "index.md";
 var styleFileName = "style.css";
 var styleFilePath = path.join(__dirname, "/template/"+styleFileName);
 var configObj;
@@ -54,19 +54,19 @@ exports.init = function(){
 	target = path.join(fs.realpathSync('.'), target);		
 	if (!fs.existsSync(target)) fs.mkdirSync(target, '0777');
 	
-	if (fs.existsSync(docsource)){
-		configObj.hasmd = true;
-	}
+	if (fs.existsSync(docsource)) configObj.hasmd = true;
+	if (fs.existsSync(fs.realpathSync('.')+'/'+indexFileName))  configObj.hasIndex = true;
+	if (fs.existsSync(fs.realpathSync('.')+'/'+changelogFileName)) configObj.hasChangelog = true;
+	if (fs.existsSync(apisource)) configObj.hasApi = true; 
+	if (fs.existsSync(demosource)) configObj.hasDemo = true;
 
 	styleFileWrite(target);
-	buildMd(readmeFileName, target);
+	buildMd(indexFileName, target);
 	buildMd(changelogFileName, target);
 
 	if (fs.existsSync(apisource)) buildApi(apisource, target);
 	if (fs.existsSync(demosource)) buildDemo(demosource, target);
-	if (fs.existsSync(docsource)){
-		mdDir(docsource, target);
-	}
+	if (fs.existsSync(docsource)) mdDir(docsource, target);
 }
 
 /**

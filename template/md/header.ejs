@@ -11,15 +11,25 @@
 <div class="header">
 	<div class="w">
 		<ul>
-			<li <% if (typeof menu != "undefined" && menu == "index" ){ %> class="current" <% } %>><a href="<% if (typeof prefix != "undefined" ){ %><%= prefix %><% } %>index.html">Home</a></li>
-			<li <% if (typeof menu != "undefined" && menu == "demo" ){ %> class="current" <% } %>><a href="<% if (typeof prefix != "undefined" ){ %><%= prefix %><% } %>demo.html">demo</a></li>
-			
+			<% if (typeof hasIndex != "undefined"){ %>
+				<li <% if (typeof menu != "undefined" && menu == "index" ){ %> class="current" <% } %>><a href="<% if (typeof prefix != "undefined" ){ %><%= prefix %><% } %>index.html">Home</a></li>
+			<% } %>
+
+			<% if (typeof hasDemo != "undefined"){ %>
+				<li <% if (typeof menu != "undefined" && menu == "demo" ){ %> class="current" <% } %>><a href="<% if (typeof prefix != "undefined" ){ %><%= prefix %><% } %>demo.html">demo</a></li>
+			<% } %>
+
 			<% if (typeof hasmd != "undefined"){ %>
 				<li><a href="doc/README.html">doc</a></li>
 			<% } %>
-
-			<li <% if (typeof menu != "undefined" && menu == "changelog" ){ %> class="current" <% } %>><a href="<% if (typeof prefix != "undefined" ){ %><%= prefix %><% } %>changelog.html">changelog</a></li>
-			<li><a href="<% if (typeof prefix != "undefined" ){ %><%= prefix %><% } %>api.html">api</a></li>
+			
+			<% if (typeof hasChangelog != "undefined"){ %>
+				<li <% if (typeof menu != "undefined" && menu == "changelog" ){ %> class="current" <% } %>><a href="<% if (typeof prefix != "undefined" ){ %><%= prefix %><% } %>changelog.html">changelog</a></li>
+			<% } %>
+			
+			<% if (typeof hasApi != "undefined"){ %>
+				<li><a href="<% if (typeof prefix != "undefined" ){ %><%= prefix %><% } %>api.html">api</a></li>
+			<% } %>
 		</ul>
 	</div>
 </div>
