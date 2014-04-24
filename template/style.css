@@ -20,6 +20,12 @@ h6{font-size:12px;}
 a{color:#2a6496;text-decoration:none;}
 a:hover{color:#E4393C;text-decoration:underline;}
 
+/* pre code */
+code, pre, tt{font-family:Monaco, Consolas, "Lucida Console", monospace;}
+pre{background-color: #f7f7f9;
+border: 1px solid #e1e1e8;margin:1em 0;overflow:auto;padding:9px 14px;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;}
+pre pre{border:none;}
+
 /* common */
 .clearfix:after{content:'';display:block;height:0;clear:both;}
 .clearfix{zoom:1;}
