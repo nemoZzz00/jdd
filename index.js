@@ -1,6 +1,6 @@
 /**
- * @js doc
- * @update 2013-11-6 11:52:21; 2014-4-12 22:30
+ * @jdd
+ * @update 2013-11-6 11:52:21; 2014-4-12 22:30; 2014-4-24 11:18:47
  */
 
 /**
@@ -21,13 +21,17 @@ var f = require('./lib/file.js');
  */
 var configFileName = "package.json";
 var changelogFileName = "changelog.md";
-var readmeFileName = "readme.md";
+var readmeFileName = "index.md";
+var styleFileName = "style.css";
+var styleFilePath = path.join(__dirname, "/template/"+styleFileName);
 var configObj;
 
-
+/**
+ * @init
+ */
 exports.init = function(){
 	var argv = process.argv;
-	var demosource, target='output', apisource;
+	var demosource,docsource, target='output', apisource;
 	
 	var configFile = fs.realpathSync('.')+'/'+configFileName;
 	if (fs.existsSync(configFileName)) {
@@ -44,21 +48,33 @@ exports.init = function(){
 	//读取配置文件
 	if (configObj.apisource) apisource = configObj.apisource;
 	if (configObj.demosource)  demosource = configObj.demosource;
+	if (configObj.docsource)  docsource = configObj.docsource;
 	if (configObj.target) target = configObj.target;
 
-	if (fs.existsSync(demosource) || fs.existsSync(apisource)) {
-		//apisource = path.join(fs.realpathSync('.'), apisource);
-		target = path.join(fs.realpathSync('.'), target);		
-		if (!fs.existsSync(target)) fs.mkdirSync(target, '0777');
-		
-		buildReadme(target);
-		createJsDoc(apisource, target);
-		buildDemo(demosource, target);
-		buildChangelog(target);
-	}else {
-		if(!fs.existsSync(demosource)) console.log( 'demo source is not exists');
-		if(!fs.existsSync(apisource)) console.log( 'api source is not exists');
+	target = path.join(fs.realpathSync('.'), target);		
+	if (!fs.existsSync(target)) fs.mkdirSync(target, '0777');
+	
+	if (fs.existsSync(docsource)){
+		configObj.hasmd = true;
 	}
+
+	styleFileWrite(target);
+	buildMd(readmeFileName, target);
+	buildMd(changelogFileName, target);
+
+	if (fs.existsSync(apisource)) buildApi(apisource, target);
+	if (fs.existsSync(demosource)) buildDemo(demosource, target);
+	if (fs.existsSync(docsource)){
+		mdDir(docsource, target);
+	}
+}
+
+/**
+ * @style file write
+ */
+var styleFileWrite = function(target){
+	var source = fs.readFileSync( styleFilePath, 'utf8');
+	fs.writeFileSync(target+styleFileName, source, 'utf8');
 }
 
 /**
@@ -110,9 +126,9 @@ var getApiData = function(source){
 }
 
 /**
- * @生成JS文档
+ * @build Api
  */
-function createJsDoc(source, target){
+function buildApi(source, target){
 	var source = f.getdirlist(source,'js$');
 
 	var obj = configObj;
@@ -127,7 +143,6 @@ function createJsDoc(source, target){
 	ejsFileWrite('/template/api.html', target+'/api.html', obj);
 	//fs.writeFileSync(target +'/api.json', JSON.stringify(obj, null, 2), 'utf8');
 }
-
 
 /**
  * @build demo
@@ -191,29 +206,42 @@ var buildDemo = function (source, target){
 }
 
 /**
- * @build changelog
+ * @build md
  */
-var buildChangelog = function (target){
-	var changelog = fs.realpathSync('.')+'/'+changelogFileName;
-	if (fs.existsSync(changelog)) {
-		var data = fs.readFileSync(changelog, 'utf8');
+var buildMd = function (filename, target, prefix, mdlist){
+	var filename = filename.replace('.md', '');
+	var realSource = fs.realpathSync('.')+'/'+filename+'.md';
+	filename = path.basename(filename);
+	if (fs.existsSync(realSource)) {
+		var data = fs.readFileSync(realSource, 'utf8');
 		var obj = configObj;
-		obj.changelog =  markdown(data);
-		obj.menu = 'changelog';
-		ejsFileWrite('/template/changelog.html', target+'/changelog.html', obj);
+		obj.md =  markdown(data);
+		obj.menu = filename;
+		obj.prefix = prefix;
+		obj.mdlist = mdlist;
+		var target = path.normalize( target+filename+'.html');
+		var tpl  =  '/template/md.html';
+		ejsFileWrite(tpl, target, obj);
 	}
 };
 
 /**
- * @build readme
+ * @md dir 
  */
-var buildReadme = function (target){
-	var readme = fs.realpathSync('.')+'/'+readmeFileName;
-	if (fs.existsSync(readme)) {
-		var data = fs.readFileSync(readme, 'utf8');
-		var obj = configObj;
-		obj.readme =  markdown(data);
-		obj.menu = 'readme';
-		ejsFileWrite('/template/readme.html', target+'/index.html', obj);
-	}
-};
+var mdDir = function(source, targetOrigin){
+	var target = targetOrigin + source;
+	if (!fs.existsSync(target)) fs.mkdirSync(target, '0777');
+
+	console.log();
+
+	var mdlist = [];
+	fs.readdirSync(source).forEach(function(filename){
+		if (/md$/.test(filename)) {
+			mdlist.push( filename.replace('.md', '') );
+		}
+	});
+
+	fs.readdirSync(source).forEach(function(filename){
+		buildMd(source+filename, target, '../', mdlist);
+	});
+}
