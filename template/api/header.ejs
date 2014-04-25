@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <title><%= name %></title>
+<% if (typeof favicon != "undefined" ){ %><link rel="shortcut icon" type="image/x-icon" href="<%= favicon %>" /><% } %>
 <!--[if IE]>
 <script>
 (function(){if(!/*@cc_on!@*/0)return;var e = "abbr,article,aside,audio,canvas,datalist,details,dialog,eventsource,figure,footer,header,hgroup,mark,menu,meter,nav,output,progress,section,time,video".split(','),i=e.length;while(i--){document.createElement(e[i])}})()

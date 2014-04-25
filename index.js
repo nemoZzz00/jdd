@@ -31,7 +31,32 @@ var configObj;
  */
 exports.init = function(){
 	var argv = process.argv;
-	var demosource,docsource, target='output', apisource;
+	var cmd2 = argv[2];
+	
+	if ( cmd2 == 'build' ){
+		buildInit();
+	}else if(cmd2 == '-v' || cmd2 == '-version'){
+		var package = require(path.join(__dirname, "package.json"));
+		console.log(package.version);
+	}else{
+		var content = [];
+		content = content.concat([
+		    '',
+		    '  Command:',
+		    '',
+		  	'    build  	build project',		
+		    '    -v      	jdd version',
+			''
+		]);
+		console.log(content.join('\n'));
+	}
+}
+
+/**
+ * @build init
+ */
+var buildInit = function (){
+	var demosource,docsource,favicon, target='output', apisource;
 	
 	var configFile = fs.realpathSync('.')+'/'+configFileName;
 	if (fs.existsSync(configFileName)) {
@@ -49,6 +74,8 @@ exports.init = function(){
 	if (configObj.apisource) apisource = configObj.apisource;
 	if (configObj.demosource)  demosource = configObj.demosource;
 	if (configObj.docsource)  docsource = configObj.docsource;
+	if (configObj.favicon)  favicon = configObj.favicon;
+
 	if (configObj.target) target = configObj.target;
 
 	target = path.join(fs.realpathSync('.'), target);		
@@ -66,7 +93,7 @@ exports.init = function(){
 
 	if (fs.existsSync(apisource)) buildApi(apisource, target);
 	if (fs.existsSync(demosource)) buildDemo(demosource, target);
-	if (fs.existsSync(docsource)) mdDir(docsource, target);
+	if (fs.existsSync(docsource)) mdDir(docsource, target); 
 }
 
 /**
