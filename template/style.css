@@ -21,9 +21,8 @@ a{color:#2a6496;text-decoration:none;}
 a:hover{color:#E4393C;text-decoration:underline;}
 
 /* pre code */
-code, pre, tt{font-family:Monaco, Consolas, "Lucida Console", monospace;}
-pre{background-color: #f7f7f9;
-border: 1px solid #e1e1e8;margin:1em 0;overflow:auto;padding:9px 14px;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;}
+code, pre, tt{font-family:Monaco, Consolas, "Lucida Console", monospace;font-size:0.857em;}
+pre{background-color: #f9f9f9;border: 1px solid #e1e1e8;margin:1em 0;overflow:auto;padding:9px 14px;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;}
 pre pre{border:none;}
 
 /* common */
@@ -38,10 +37,14 @@ pre pre{border:none;}
 .w{width: 990px;margin:0 auto; }
 
 /* mdlist */
-.mdlist{float:left;margin-right:50px;padding-top:35px;width:150px;}
-.mdlist li a{display:block;padding:5px 40px 5px 10px;}
-.mdlist li a:hover{background-color:#f1f1f1;color:#2a6496;text-decoration:none;}
-.mdlist .current a,.mdlist .current a:hover{color:#E4393C;text-decoration:none;background-color:#f1f1f1;}
+.mdlist{float:left;margin-right:30px;margin-top:35px;width:200px;border-right:1px solid #ddd;}
+.mdlist li{border-bottom:1px solid #ddd;}
+.mdlist li:last-child{border-bottom:none;}
+.mdlist li a{display:block;padding:5px 0px 5px 10px;}
+.mdlist li a:hover,
+.mdlist .current a,
+.mdlist .current a:hover{color:#E4393C;text-decoration:none;background-color:#f1f1f1;}
+.mdlist li a:hover{color:#2a6496;background-color:#f9f9f9;}
 
 /* md */
 .md{float:left;width:720px;}
