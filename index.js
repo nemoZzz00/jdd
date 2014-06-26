@@ -26,6 +26,9 @@ var styleFileName = "style.css";
 var styleFilePath = path.join(__dirname, "/template/"+styleFileName);
 var configObj;
 
+//demo所在的文件夹里的js不放在api里
+var demoDirname = 'example';
+
 /**
  * @init
  */
@@ -91,8 +94,8 @@ var buildInit = function (){
 	buildMd(indexFileName, target);
 	buildMd(changelogFileName, target);
 
-	if (fs.existsSync(apisource)) buildApi(apisource, target);
 	if (fs.existsSync(demosource)) buildDemo(demosource, target);
+	if (fs.existsSync(apisource)) buildApi(apisource, target);
 	if (fs.existsSync(docsource)) mdDir(docsource, target); 
 }
 
@@ -156,8 +159,7 @@ var getApiData = function(source){
  * @build Api
  */
 function buildApi(source, target){
-	var source = f.getdirlist(source,'js$');
-
+	var source = f.getdirlist(source, 'js$', '/'+demoDirname+'/');
 	var obj = configObj;
 	//description markdown转换成html
 	if (obj.api.description) {
@@ -175,7 +177,7 @@ function buildApi(source, target){
  * @build demo
  */
 var buildDemo = function (source, target){
-	var source = f.getdirlist(source,'html$');
+	var source = f.getdirlist(source,'html$', configObj.target);
 	var menuData = '';
 	var obj = {};
 
