@@ -12,9 +12,13 @@ var fs = require('fs');
 //outer
 var ejs = require('ejs');
 var markdown = require('github-flavored-markdown').parse;
+var Node_watch = require('node-watch');
+
 //lib
 var dox = require('./lib/dox.js');
 var f = require('./lib/file.js');
+
+
 
 /**
  * @定义
@@ -36,18 +40,28 @@ exports.init = function(){
 	var argv = process.argv;
 	var cmd2 = argv[2];
 	
-	if ( cmd2 == 'build' ){
+	if ( cmd2 == '--build' || cmd2 == '-b' ){
 		buildInit();
+		console.log('jdd build done!');
 	}else if(cmd2 == '-v' || cmd2 == '-version'){
 		var package = require(path.join(__dirname, "package.json"));
 		console.log(package.version);
+	}else if(cmd2 == '--watch'|| cmd2 == '-w' ){
+		buildInit();
+		Node_watch('./', function(filename) {
+			if(/\.md$/.test(filename)){
+				console.log('jdd file change: '+filename);
+				buildInit();
+			}
+		});
 	}else{
 		var content = [];
 		content = content.concat([
 		    '',
 		    '  Command:',
 		    '',
-		  	'    build  	build project',		
+		  	'    -b,--build  	build project',		
+		  	'    -w,--watch  	watch current , build project',		
 		    '    -v      	jdd version',
 			''
 		]);
@@ -80,6 +94,7 @@ var buildInit = function (){
 	if (configObj.favicon)  favicon = configObj.favicon;
 
 	if (configObj.target) target = configObj.target;
+	configObj.demoExclude = configObj.demoExclude ? '|' + configObj.demoExclude : '';
 
 	target = path.join(fs.realpathSync('.'), target);		
 	if (!fs.existsSync(target)) fs.mkdirSync(target, '0777');
@@ -120,7 +135,7 @@ var ejsFileWrite = function(source, target, data){
 	
 	var targetfilename = path.normalize(target);
 	fs.writeFileSync(targetfilename, demoHtml, 'utf8');
-	console.log('Create ['+targetfilename+'] done!');
+	//console.log('Create ['+targetfilename+'] done!');
 }
 
 /**
@@ -177,7 +192,7 @@ function buildApi(source, target){
  * @build demo
  */
 var buildDemo = function (source, target){
-	var source = f.getdirlist(source,'html$', configObj.target);
+	var source = f.getdirlist(source,'html$', configObj.target+configObj.demoExclude);
 	var menuData = '';
 	var obj = {};
 
@@ -260,8 +275,6 @@ var buildMd = function (filename, target, prefix, mdlist){
 var mdDir = function(source, targetOrigin){
 	var target = targetOrigin + source;
 	if (!fs.existsSync(target)) fs.mkdirSync(target, '0777');
-
-	console.log();
 
 	var mdlist = [];
 	fs.readdirSync(source).forEach(function(filename){
