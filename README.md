@@ -30,6 +30,7 @@ cmd命令行窗口下执行
 		},
 		"apisource":"js/", //js目录
 		"demosource":"demo/", //demo目录
+		"demoExclude":"demoExcludeDir", //demo目录过滤
 		"docsource":"doc/", //说明文档目录
 		"target":"docs/", //生成到目录
 		"demopathprefix":"../" //demo页导航url前缀
