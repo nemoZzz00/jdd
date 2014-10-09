@@ -69,6 +69,48 @@ exports.init = function(){
 	}
 }
 
+var $ = {};
+
+/**
+* @取当前时间 2014-01-14 
+* @return 2014-01-14
+*/
+$.getDay = function(separator) {
+	if(typeof(separator) == 'undefined'){
+		separator = '-';
+	}
+	var myDate=new Date();
+	var year=myDate.getFullYear();
+	var month=myDate.getMonth()+1;
+	month = month<10 ? '0'+month : month;
+	var day=myDate.getDate();
+	day = day<10 ? '0'+day : day;
+	return year +separator+ month+separator+ day;
+}
+
+/**
+* @取当前时间 12:11:10 
+* @return 14:44:55
+*/
+$.getTime = function(separator, hasMs) {
+	if(typeof(separator) == 'undefined'){
+		separator = ':';
+	}
+	var myDate=new Date();
+	var hour=myDate.getHours();
+	hour = hour<10 ? '0'+hour : hour;
+	var mint=myDate.getMinutes();
+	mint = mint<10 ? '0'+mint : mint;
+	var seconds=myDate.getSeconds();
+	seconds = seconds<10 ? '0'+seconds : seconds;
+	var ms = myDate.getMilliseconds();
+	var result = hour +separator+ mint+separator+ seconds;
+	if (typeof(hasMs) != 'undeinfed' && hasMs) {
+		result += separator + ms;
+	}
+	return result;
+}
+
 /**
  * @build init
  */
@@ -86,7 +128,10 @@ var buildInit = function (){
 		console.log('jdd error '+configFileName+' not extist');
 		return;
 	}
-	
+
+	//当前时间
+	configObj.date = $.getDay()+' '+$.getTime();
+
 	//读取配置文件
 	if (configObj.apisource) apisource = configObj.apisource;
 	if (configObj.demosource)  demosource = configObj.demosource;
@@ -181,7 +226,7 @@ function buildApi(source, target){
 		obj.api.description = markdown(obj.api.description);
 	}
 
-	obj.date = new Date();
+	//obj.date = new Date();
 	obj.apis = getApiData(source, null);
 
 	ejsFileWrite('/template/api.html', target+'/api.html', obj);
