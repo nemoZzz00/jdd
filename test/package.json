@@ -1,13 +1,14 @@
 {
-	"name": "myjs",
-	"version": "1.0.0",
-	"author": "fe",
-	"api": {
-		"name": "jds api",
-		"description": ""
-	},
-	"apisource":"js/",
-	"demosource":"demo/",
-	"target":"docs/",
-	"demopathprefix":"../"
+    "name": "FE-Doc",
+    "version": "1.0.0",
+    "author": "fe",
+    "api": {
+        "name": "FE组件库API",
+        "description": "这是FE组件库API的描述信息 "
+    },
+    "apisource":"js/",
+    "demosource":"demo/",
+    "docsource":"doc/",
+    "target":"_output/",
+    "demopathprefix":"../"
 }
