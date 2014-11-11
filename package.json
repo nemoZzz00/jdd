@@ -1,7 +1,7 @@
 {
 	"name": "jdd",
-	"description": "js doc, explain doc, demo快速生成",
-	"version": "1.0.7",
+	"description": "js doc, explain doc, demo",
+	"version": "1.0.8",
 	"author": {
 		"name": "putaoshu@126.com"
 	},

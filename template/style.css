@@ -94,8 +94,22 @@ width: 260px;margin-top:30px; }
 .sidebar .demoList a{display:block;}
 .sidebar .demoList .on{color: #E4393C;text-decoration: underline;}
 
+
+/* 2014-11-11 */
+#content{position:relative;}
+#content .main{width:980px;}
+#content .rightbar{position:absolute;right:0;}
+#content .extra{float:none;}
+
 /* main */
+.main .sourceCodeBox,
 .main .demoIframe{float:left;padding:10px;border:1px solid #ddd;}
+
+.sourceCodeBox{width: 980px;}
+.sourceCodeBox h3{font-size:14px;color:#666;margin: 0;padding: 0;}
+.sourceCodeBox #sourceCodeContent{font-family:Monaco, Consolas, "Lucida Console", monospace;font-size:12px;background-color:#fff;border:none;padding:0;margin:0;}
+.sourceCodeBox .syntaxhighlighter table td.gutter .line{padding-left:0em!important}
+
 .extra{float:left;display:block;margin-left:10px;}
 .extra a{padding-right: 13px;background-position: center right;background-repeat: no-repeat;background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAVElEQVR42n3PgQkAIAhEUXdqJ3dqJ3e6IoTPUSQcgj4EQ5IlUiLE0Jil3PECXhcHGBhZ8kg4hwxAu3MZeCGeyFnAXp4hqNQPnt7QL0nADpD6wHccLvnAKksq8iiaAAAAAElFTkSuQmCC);}
 
