@@ -10,5 +10,6 @@
     "demosource":"demo/",
     "docsource":"doc/",
     "target":"_output/",
-    "demopathprefix":"../"
+    "demopathprefix":"../",
+	"stat":"这是统计代码"
 }

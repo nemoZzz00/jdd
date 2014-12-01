@@ -115,7 +115,7 @@ $.getTime = function(separator, hasMs) {
  * @build init
  */
 var buildInit = function (){
-	var demosource,docsource,favicon, target='output', apisource;
+	var demosource,docsource,favicon, target='output', apisource, stat;
 	
 	var configFile = fs.realpathSync('.')+'/'+configFileName;
 	if (fs.existsSync(configFileName)) {
@@ -137,6 +137,7 @@ var buildInit = function (){
 	if (configObj.demosource)  demosource = configObj.demosource;
 	if (configObj.docsource)  docsource = configObj.docsource;
 	if (configObj.favicon)  favicon = configObj.favicon;
+	if (configObj.stat)  stat = configObj.stat;
 
 	if (configObj.target) target = configObj.target;
 	configObj.demoExclude = configObj.demoExclude ? '|' + configObj.demoExclude : '';
@@ -249,7 +250,7 @@ var buildDemo = function (source, target){
 		}
 		obj[dirname].push(item);
 	});
-
+	
 	//console.log(obj);
 
 	for (var i in obj  ){

@@ -33,7 +33,8 @@ cmd命令行窗口下执行
 		"demoExclude":"demoExcludeDir", //demo目录过滤
 		"docsource":"doc/", //说明文档目录
 		"target":"docs/", //生成到目录
-		"demopathprefix":"../" //demo页导航url前缀
+		"demopathprefix":"../", //demo页导航url前缀
+		"stat":"" //统计代码
 	}
 
 ##建议package.json源文件
