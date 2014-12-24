@@ -72,6 +72,7 @@ p code,li code{margin:1em 0;padding:1px 4px;}
 .footer{margin-top:50px; padding:30px 0;color: #999;background-color:#F5F5F5; border-top:1px solid #E5E5E5; text-align:center;  }
 .footer h3{margin:0;}
 .footer h3 i{font-weight:normal;font-style:normal;font-size:14px;}
+.footer h3 span{font-weight:normal;font-style:normal;font-size:14px;}
 
 /*wrap*/
 .nav{float:left; 

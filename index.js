@@ -115,7 +115,7 @@ $.getTime = function(separator, hasMs) {
  * @build init
  */
 var buildInit = function (){
-	var demosource,docsource,favicon, target='output', apisource, stat;
+	var demosource,docsource, target='output', apisource;
 	
 	var configFile = fs.realpathSync('.')+'/'+configFileName;
 	if (fs.existsSync(configFileName)) {
@@ -136,8 +136,15 @@ var buildInit = function (){
 	if (configObj.apisource) apisource = configObj.apisource;
 	if (configObj.demosource)  demosource = configObj.demosource;
 	if (configObj.docsource)  docsource = configObj.docsource;
-	if (configObj.favicon)  favicon = configObj.favicon;
-	if (configObj.stat)  stat = configObj.stat;
+	
+	if(configObj.extendMenu){
+		var extendMenuHtml = '<li><a>|</a></li>';
+		for (var i in configObj.extendMenu){
+			var j = configObj.extendMenu[i];
+			extendMenuHtml += '<li><a href="'+i+'" target="_blank">'+j+'</a></li>';
+		}
+		configObj.extendMenu = extendMenuHtml;
+	}
 
 	if (configObj.target) target = configObj.target;
 	configObj.demoExclude = configObj.demoExclude ? '|' + configObj.demoExclude : '';
@@ -301,15 +308,22 @@ var buildDemo = function (source, target){
 var buildMd = function (filename, target, prefix, mdlist){
 	var filename = filename.replace('.md', '');
 	var realSource = fs.realpathSync('.')+'/'+filename+'.md';
-	filename = path.basename(filename);
+	var basename = path.basename(filename);
+	var dirname = path.dirname(filename);
+
 	if (fs.existsSync(realSource)) {
 		var data = fs.readFileSync(realSource, 'utf8');
 		var obj = configObj;
+		
 		obj.md =  markdown(data);
-		obj.menu = filename;
+
+		var isDoc =  obj.docsource.replace(/\./g, '').indexOf(dirname) > -1;
+		obj.menu = isDoc ? 'doc' : basename;
+		obj.menuDoc = isDoc ? 'README.html' : 'doc/README.html';
+
 		obj.prefix = prefix;
 		obj.mdlist = mdlist;
-		var target = path.normalize( target+filename+'.html');
+		var target = path.normalize( target+basename+'.html');
 		var tpl  =  '/template/md.html';
 		ejsFileWrite(tpl, target, obj);
 	}

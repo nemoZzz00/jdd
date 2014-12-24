@@ -3,12 +3,21 @@
 
 <div class="footer">
 	<div class="gotop"><a href="#">gotop</a></div>
-	<h3><%= name %> <i> @<%= date %></i>
+	<h3>
+		<% if (typeof copyright != "undefined"){ %>
+			<%- copyright %>
+		<% } %>
+		<%= name %>
+		<i> @<%= date %></i>
 		<% if (typeof stat != "undefined"){ %>
 			 <i><%- stat %></i>
 		<% } %>
 	</h3>
 </div>
+
+<% if (typeof extendHtml != "undefined"){ %>
+<%- extendHtml %>
+<% } %>
 
 </body>
 </html>
