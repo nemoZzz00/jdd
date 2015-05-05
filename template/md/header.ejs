@@ -12,7 +12,11 @@
 <div class="header">
 	<div class="w">
 		<ul>
-			<% if (typeof hasIndex != "undefined"){ %><li <% if (typeof menu != "undefined" && menu == "index" ){ %> class="current" <% } %>><a href="<% if (typeof prefix != "undefined" ){ %><%= prefix %><% } %>index.html">Home</a></li><% } %>
+			<% if (typeof hasIndex != "undefined"){ %>
+				<li class="home-menu<% if (typeof menu != "undefined" && menu == "index" ){ %> current<% } %>" >
+					<a href="<% if (typeof prefix != "undefined" ){ %><%= prefix %><% } %>index.html" title="home">Home</a>
+				</li>
+			<% } %>
 			<% if (typeof hasDemo != "undefined"){ %><li <% if (typeof menu != "undefined" && menu == "demo" ){ %> class="current" <% } %>><a href="<% if (typeof prefix != "undefined" ){ %><%= prefix %><% } %>demo.html">demo</a></li><% } %>
 			<% if (typeof hasmd != "undefined"){ %><li <% if (typeof menu != "undefined" && menu == "doc" ){ %> class="current" <% } %>><a href="<%= menuDoc %>">doc</a></li><% } %>
 			<% if (typeof hasChangelog != "undefined"){ %><li <% if (typeof menu != "undefined" && menu == "changelog" ){ %> class="current" <% } %>><a href="<% if (typeof prefix != "undefined" ){ %><%= prefix %><% } %>changelog.html">changelog</a></li><% } %>
