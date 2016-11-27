@@ -319,7 +319,7 @@ var buildMd = function (filename, target, prefix, mdlist){
 
 		var isDoc =  obj.docsource.replace(/\./g, '').indexOf(dirname) > -1;
 		obj.menu = isDoc ? 'doc' : basename;
-		obj.menuDoc = isDoc ? 'README.html' : 'doc/README.html';
+		obj.menuDoc = isDoc ? 'README.html' : configObj.docsource+'README.html';
 
 		obj.prefix = prefix;
 		obj.mdlist = mdlist;

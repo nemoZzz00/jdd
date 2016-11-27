@@ -9,6 +9,11 @@ table{empty-cells:show;}
 em{font-style:normal;}
 
 body{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;background:#fff;color: #333;font-size:14px;line-height:1.8;}
+
+@media screen and (max-width: 1000px) {
+    body{font-size:100%;}
+}
+
 h1,h2,h3,h4,h5,h6{margin-top:20px;margin-bottom:10px;}
 h1,.h1{font-size:32px;}
 h2{font-size:22px;}
@@ -35,6 +40,11 @@ p code,li code{margin:1em 0;padding:1px 4px;}
 
 /* layout */
 .wrapper,.w{margin:0px auto;width:1210px;}
+
+@media screen and (max-width: 1000px) {
+    .wrapper,.w{width:100%;}
+}
+
 .wrapper:after{content:'';display:block;height:0;clear:both;}
 .wrapper{zoom:1;}	
 .main{float:left;}
@@ -103,7 +113,10 @@ width: 260px;margin-top:30px; }
 
 /* 2014-11-11 */
 #content{position:relative;}
-#content .main{width:980px;}
+#content .main{width:980px;overflow:hidden;}
+@media screen and (max-width: 1000px) {
+	#content .main{width:100%;}	
+}
 #content .rightbar{position:absolute;right:0;}
 #content .extra{float:none;}
 
