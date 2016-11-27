@@ -23,7 +23,7 @@ var f = require('./lib/file.js');
 /**
  * @定义
  */
-var configFileName = "package.json";
+var configFileName = "jdd.config.json";
 var changelogFileName = "changelog.md";
 var indexFileName = "index.md";
 var styleFileName = "style.css";
@@ -44,7 +44,7 @@ exports.init = function(){
 		buildInit();
 		console.log('jdd build done!');
 	}else if(cmd2 == '-v' || cmd2 == '-version'){
-		var package = require(path.join(__dirname, "package.json"));
+		var package = require(path.join(__dirname, "jdd.config.json"));
 		console.log(package.version);
 	}else if(cmd2 == '--watch'|| cmd2 == '-w' ){
 		buildInit();

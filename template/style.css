@@ -68,9 +68,9 @@ p code,li code{margin:1em 0;padding:1px 4px;}
 .header a:hover, .header .current a{color: #fff; text-decoration:none; }
 .header li{float:left;}
 
-/* home-menu */
+/* home-menu 
 .header .home-menu{padding:4px 20px 4px 0;}
-.header .home-menu a{display:block;background:url(http://img13.360buyimg.com/da/jfs/t970/298/779904244/2569/f5832e25/55482dc7N5ba074ef.png) no-repeat;padding:0;width:32px;height:38px;text-indent:-9999em;}
+.header .home-menu a{display:block;background:url(http://img13.360buyimg.com/da/jfs/t970/298/779904244/2569/f5832e25/55482dc7N5ba074ef.png) no-repeat;padding:0;width:32px;height:38px;text-indent:-9999em;} */
 
 
 /*footer*/
