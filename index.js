@@ -138,7 +138,8 @@ var buildInit = function (){
 	if (configObj.docsource)  docsource = configObj.docsource;
 	
 	if(configObj.extendMenu){
-		var extendMenuHtml = '<li><a>|</a></li>';
+		var extendMenuHtml = '';
+		//<li><a>|</a></li>
 		for (var i in configObj.extendMenu){
 			var j = configObj.extendMenu[i];
 			extendMenuHtml += '<li><a href="'+i+'" target="_blank">'+j+'</a></li>';
@@ -236,6 +237,7 @@ function buildApi(source, target){
 
 	//obj.date = new Date();
 	obj.apis = getApiData(source, null);
+	obj.menu = 'api';
 
 	ejsFileWrite('/template/api.html', target+'/api.html', obj);
 	//fs.writeFileSync(target +'/api.json', JSON.stringify(obj, null, 2), 'utf8');

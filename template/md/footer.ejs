@@ -3,7 +3,7 @@
 
 <div class="footer">
 	<div  class="w">
-		<div class="gotop"><a href="#">gotop</a></div>
+		<div class="gotop" style="display:none;"><a href="#">gotop</a></div>
 		<h3>
 			<% if (typeof copyright != "undefined"){ %>
 				<%- copyright %>
@@ -15,10 +15,40 @@
 		</h3>
 	</div>
 </div>
+<% if (typeof extendHtml != "undefined"){ %> <%- extendHtml %><% } %>
 
-<% if (typeof extendHtml != "undefined"){ %>
-<%- extendHtml %>
-<% } %>
-
+<script type="text/javascript">
+	$('.header-bar').on('click',function() {
+		if ($(this).hasClass('header-bar-active')) {
+			$('.navbar-collapse').hide();
+			$(this).removeClass('header-bar-active');
+		} else {
+			$('.navbar-collapse').show();
+			$(this).addClass('header-bar-active');
+		}
+	});
+	$('#menu_icon').on('click',function() {
+		if ($('body').hasClass('navigating')) {
+			$('body').removeClass('navigating');
+			$(this).css('transform','translateX(0px)');
+			$('.container').css('transform','translateX(0px)');
+			$('#sidebar').css('transform','translateX(171px)');
+		} else {
+			$('body').addClass('navigating');
+			$('#sidbar').css('transform','translateX(0px)');
+			$(this).css('transform','translateX(-140px)');
+			$('.container').css('transform','translateX(-140px)');
+			$('#sidebar').css('transform','translateX(30px)');
+		}
+	})
+	$('#sidebar a,#sidebar li').on('click',function() {
+		if (window.screen.width <= 750) {
+			$('body').removeClass('navigating');
+			$('#sidebar').css('transform','translateX(171px)');
+			$('#menu_icon').css('transform','translateX(0px)');
+			$('.container').css('transform','translateX(0px)');
+		}
+	});
+</script>
 </body>
 </html>

@@ -1,10 +1,7 @@
 <% if (typeof mdlist != "undefined" ){ %>
-
-<div class="mdlist">
+<div class="mdlist" id="sidebar">
 	<ul>
-		<% mdlist.forEach(function(item){ %> 
-			<li <% if (typeof menu != "undefined" && menu == item ){ %> class="current" <% } %>><a href="<%=item%>.html"><%=item%></a></li>
-		<% }) %>
+	<% mdlist.forEach(function(item){ %><li <% if (typeof menu != "undefined" && menu == item ){ %> class="current" <% } %>><a href="<%=item%>.html"><%=item%></a></li><% }) %>
 	</ul>
 </div>
 <% } %>
