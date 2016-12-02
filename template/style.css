@@ -243,7 +243,7 @@ hr{height:1px;border:0;padding:0;margin:35px 0 0 0;background:rgba(0,0,0,0.20);b
     }
     /*doc*/
     #menu_icon {
-      display: block;
+      /*display: block;*/
     }
     .doc {
       float:none;
