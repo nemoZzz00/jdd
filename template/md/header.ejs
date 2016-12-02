@@ -3,6 +3,9 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<!--[if lt IE 9]>
+    <script src="http://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+<![endif]-->
 <% if (typeof favicon != "undefined" ){ %><link rel="shortcut icon" type="image/x-icon" href="<%= favicon %>" /><% } %>
 <title><% if (typeof name != "undefined" ){ %><%= name %><% } %><% if (typeof menu != "undefined" ){ %>_<%=menu%><% } %></title>
 <link type="text/css" rel="stylesheet"  href="<% if (typeof prefix != "undefined" ){ %><%= prefix %><% } %>style.css"/>
