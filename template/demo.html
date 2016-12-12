@@ -29,9 +29,9 @@
 		<div class="demoList"></div>
 	</div>
 	<div class="main">
-		<iframe id="demoIframe" src="" frameborder="no" marginwidth="0" marginheight="0" width="90%" height="500" class="demoIframe"></iframe>
-		<div id="sourceCodeBox" class="sourceCodeBox">
-			<h3 id="result">源代码</h3>
+		<iframe id="demoIframe" src="" frameborder="no" marginwidth="0" marginheight="0" width="85%" height="500" class="demoIframe"></iframe>
+		<div id="sourceCodeBox" class="sourceCodeBox" style="width: 85%;">
+			<h3 id="result">源码</h3>
 			<pre id="sourceCodeContent" class="brush:js;html-script:true;"></pre>
 		</div>
 	</div>
@@ -39,7 +39,7 @@
 		<div class="extra">
 			<p><a href="###" class="apiLink">查看API</a></p>
 			<p><a href="###" class="demoLink">单独打开</a></p>
-			<p><a href="###" class="sourceCodeLink" href="javascript:;">查看源代码</a></p>
+			<p><a href="###" class="sourceCodeLink" href="javascript:;">查看源码</a></p>
 		</div>
 	</div>
 </div>
@@ -53,7 +53,7 @@
 		$('.demoIframe').show().attr('src',href);
 		$('#sourceCodeBox').hide();
 		$('.sourceCodeLink').data('url',href);
-		$('.sourceCodeLink').html('查看源代码').data('action','code');
+		$('.sourceCodeLink').html('查看源码').data('action','code');
 	}
 
 	demo.init = function(){
@@ -135,7 +135,7 @@
 			}
 			$('.sourceCodeLink').html('查看效果').data('action','effect');
 		} else {
-			$('.sourceCodeLink').html('查看源代码').data('action','code');
+			$('.sourceCodeLink').html('查看源码').data('action','code');
 			$('#demoIframe').show();
 			$('#sourceCodeBox').hide();
 		}

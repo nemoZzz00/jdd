@@ -53,7 +53,7 @@ p code,li code{margin:1em 0;padding:1px 4px;}
 .wrapper:after{content:'';display:block;height:0;clear:both;}
 .wrapper{zoom:1;}
 .main{float:left;}
-.sidebar{float:left;width:110px;}
+.sidebar{float:left;width:180px;}
 
 /* mdlist */
 .mdlist{float:left;margin-right:30px;margin-top:35px;width:200px;border-right:1px solid #ddd;}
@@ -120,6 +120,8 @@ width: 260px;margin-top:30px; }
 #content .main{width:820px;overflow:hidden;}
 @media screen and (max-width: 1000px) {
 	#content .main{width:100%; margin-top: 15px;}
+  #demoIframe,.sourceCodeBox{width:92%!important;}
+
 }
 #content .rightbar{position:absolute;right:0;}
 #content .extra{float:none;}
@@ -128,7 +130,7 @@ width: 260px;margin-top:30px; }
 .main .sourceCodeBox,
 .main .demoIframe{float:left;padding:10px;border:1px solid #ddd;}
 
-.sourceCodeBox{width: 820px;}
+/*.sourceCodeBox{width: 85%;}*/
 .sourceCodeBox h3{font-size:14px;color:#666;margin: 0;padding: 0;}
 .sourceCodeBox #sourceCodeContent{font-family:Monaco, Consolas, "Lucida Console", monospace;font-size:12px;background-color:#fff;border:none;padding:0;margin:0;}
 .sourceCodeBox .syntaxhighlighter table td.gutter .line{padding-left:0em!important}
