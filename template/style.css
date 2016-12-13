@@ -120,8 +120,8 @@ width: 260px;margin-top:30px; }
 #content .main{width:820px;overflow:hidden;}
 @media screen and (max-width: 1000px) {
 	#content .main{width:100%; margin-top: 15px;}
-  #demoIframe,.sourceCodeBox{width:92%!important;}
-
+  #demoIframe,.sourceCodeBox{width:100%!important;padding:0;border:none;}
+  .main .sourceCodeBox, .main .demoIframe{width: 100%!important;border:none!important}
 }
 #content .rightbar{position:absolute;right:0;}
 #content .extra{float:none;}
