@@ -228,7 +228,7 @@ var getApiData = function(source){
  * @build Api
  */
 function buildApi(source, target){
-	var source = f.getdirlist(source, 'js$', '/'+demoDirname+'/');
+	var source = f.getdirlist(source, 'js$', (configObj.target+configObj.apiExclude).replace('//','') );
 	var obj = configObj;
 	//description markdown转换成html
 	if (obj.api.description) {
